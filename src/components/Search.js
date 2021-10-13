@@ -58,16 +58,16 @@ class Search extends Component {
   }
     
 
-  pushToPokedex = () => this.props.funcToPush(this.state.pokemon);
+  pushToPokedex = () => this.props.Push(this.state.pokemon);
 
-  removeFromPokedex = () => this.props.funcToRemove(this.state.pokemon);
+  removeFromPokedex = () => this.props.Remove(this.state.pokemon);
 
   render() {
     return (
       <div className="Search">
         <h2>Adicionar Pokémons</h2>
-        <SearchBar onChange={this.updateSearchValue} value={this.state.searchValue} />
-        <SearchButton onClick={this.search} pokemon={this.props.pokemon} />
+        <SearchBar onChange={this.updateSearchValue} onEnter={this.search} value={this.state.value} />
+        <SearchButton onClick={this.search} />
         {this.state.status ? (
           <Pokemon
             pokemon={this.state.pokemon}

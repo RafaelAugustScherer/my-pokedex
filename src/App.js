@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import './App.css';
-import PokemonList from './components/PokemonList';
+import Pokedex from './components/Pokedex';
 import Header from './components/Header';
 import Search from './components/Search';
 import data from './assets/data';
@@ -17,23 +17,23 @@ class App extends Component {
     };
   }
 
-  updatePokemonList = () =>
+  updatePokedex = () =>
     this.setState({
       pokemons: JSON.parse(localStorage.getItem('myPokedex')),
     })
 
-  PushPokemonToList = (pokemon) => {
+  PushPokemon = (pokemon) => {
     const prevPokedex = JSON.parse(localStorage.getItem('myPokedex'));
     const newPokedex = JSON.stringify([...prevPokedex, pokemon]);
     localStorage.setItem('myPokedex', newPokedex);
-    this.updatePokemonList();
+    this.updatePokedex();
   };
 
-  RemovePokemonFromList = (pokemon) => {
+  RemovePokemon = (pokemon) => {
     const prevPokedex = JSON.parse(localStorage.getItem('myPokedex'));
     const newPokedex = JSON.stringify(prevPokedex.filter((storagePokemon) => storagePokemon.id !== pokemon.id));
     localStorage.setItem('myPokedex', newPokedex);
-    this.updatePokemonList();
+    this.updatePokedex();
   };
 
   render() {
@@ -41,8 +41,8 @@ class App extends Component {
       <>
         <Header title="My Pokedex" />
         <div className="App">
-          <PokemonList pokemons={this.state.pokemons} updateList={this.updatePokemonList} />
-          <Search pokemons={this.state.pokemons} funcToPush={this.PushPokemonToList} funcToRemove={this.RemovePokemonFromList} />
+          <Pokedex pokemons={this.state.pokemons} Remove={this.RemovePokemon} />
+          <Search pokemons={this.state.pokemons} Push={this.PushPokemon} Remove={this.RemovePokemon} />
         </div>
       </>
     );
