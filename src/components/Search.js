@@ -15,20 +15,28 @@ class Search extends Component {
     };
   }
 
-  updateSearchValue = (value) => this.setState({ value });
+  capitalize = (str) => str.charAt(0).toUpperCase().concat(str.slice(1));
+
+  updateSearchValue = (value) => {
+    value = value.toLowerCase();
+    this.setState({ value });
+  };
 
   isPokemonInPokedex = () => {
     const myPokedex = this.props.pokemons;
-    const pokemon = myPokedex.find((pokemon) => pokemon.id === this.state.pokemon.id && pokemon.isFavorite);
+    const pokemon = myPokedex.find(
+      (pokemon) => pokemon.id === this.state.pokemon.id && pokemon.isFavorite
+    );
     return pokemon ? true : false;
   };
 
   search = () => {
-    this.setState({ status: undefined })
+    this.setState({ status: undefined });
     fetch(`https://pokeapi.co/api/v2/pokemon/${this.state.value}`)
       .then((response) => {
         if (response.ok) {
           response.json().then(({ id, name, types, weight, sprites }) => {
+            name = this.capitalize(name);
             types = types.map(({ type }) => type.name);
 
             this.renderSearch({
@@ -55,8 +63,7 @@ class Search extends Component {
       status: true,
       pokemon,
     });
-  }
-    
+  };
 
   pushToPokedex = () => this.props.Push(this.state.pokemon);
 
@@ -66,7 +73,11 @@ class Search extends Component {
     return (
       <div className="Search">
         <h2>Adicionar Pokémons</h2>
-        <SearchBar onChange={this.updateSearchValue} onEnter={this.search} value={this.state.value} />
+        <SearchBar
+          onChange={this.updateSearchValue}
+          onEnter={this.search}
+          value={this.state.value}
+        />
         <SearchButton onClick={this.search} />
         {this.state.status ? (
           <Pokemon
