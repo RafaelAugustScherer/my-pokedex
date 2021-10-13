@@ -7,7 +7,7 @@ const pokemons = [
             value: 6.0,
             measurementUnit: "kg"
         },
-        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/25.gif",
         isFavorite: true,
     },
     {
@@ -18,7 +18,7 @@ const pokemons = [
             value: 8.5,
             measurementUnit: "kg"
         },
-        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/4.gif",
         isFavorite: true,
     },
     {
@@ -29,7 +29,7 @@ const pokemons = [
             value: 2.9,
             measurementUnit: "kg"
         },
-        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png",
+        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/10.gif",
         isFavorite: true,
     },
     {
@@ -40,7 +40,7 @@ const pokemons = [
             value: 6.9,
             measurementUnit: "kg"
         },
-        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/23.png",
+        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/23.gif",
         isFavorite: true,
     },
     {
@@ -51,7 +51,7 @@ const pokemons = [
             value: 48.0,
             measurementUnit: "kg"
         },
-        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png",
+        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/65.gif",
         isFavorite: true,
     },
     {
@@ -62,7 +62,7 @@ const pokemons = [
             value: 4.0,
             measurementUnit: "kg"
         },
-        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png",
+        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/151.gif",
         isFavorite: true,
     },
     {
@@ -73,7 +73,7 @@ const pokemons = [
             value: 95.0,
             measurementUnit: "kg"
         },
-        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/78.png",
+        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/78.gif",
         isFavorite: true,
     },
     {
@@ -84,7 +84,7 @@ const pokemons = [
             value: 460.0,
             measurementUnit: "kg"
         },
-        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png",
+        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/143.gif",
         isFavorite: true,
     },
     {
@@ -95,7 +95,7 @@ const pokemons = [
             value: 16.5,
             measurementUnit: "kg"
         },
-        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/148.png",
+        image: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/148.gif",
         isFavorite: true,
     }
   ];

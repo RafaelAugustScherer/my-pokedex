@@ -38,7 +38,8 @@ class Search extends Component {
           response.json().then(({ id, name, types, weight, sprites }) => {
             name = this.capitalize(name);
             types = types.map(({ type }) => type.name);
-
+            sprites = sprites.versions['generation-v']['black-white'].animated;
+            
             this.renderSearch({
               id,
               name,
