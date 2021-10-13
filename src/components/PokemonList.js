@@ -27,7 +27,6 @@ class PokemonList extends Component {
   render() {
     return (
       <div className="Pokemon-list">
-        <h2 className="pokedex-title">My Pokedex</h2>
         {this.state.pokemons.map((pokemon) =>
           pokemon.isFavorite ? (
             <Pokemon pokemon={pokemon} key={pokemon.id} handleFavorite={this.handleFavorite} isFavorite={true} />

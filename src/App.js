@@ -36,7 +36,7 @@ class App extends Component {
   render() {
     return (
       <>
-        <Header title="PokeDex - Exercise" />
+        <Header title="My Pokedex" />
         <div className="App">
           <PokemonList searchedPokemons={this.state.pokemonsToPush} />
           <Search funcToPush={this.PushPokemonToList} funcToRemove={this.RemovePokemonFromList} />

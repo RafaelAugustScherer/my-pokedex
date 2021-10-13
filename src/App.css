@@ -20,11 +20,6 @@ body {
   flex-direction: row;
 }
 
-.pokedex-title {
-  flex-basis: 100%;
-  color: whitesmoke;
-}
-
 .Pokemon {
   position: relative;
   display: flex;
