@@ -50,11 +50,14 @@ class Search extends Component {
       .catch((err) => console.log('Fetch Error: ', err.message));
   };
 
-  renderSearch = (pokemon) =>
+  renderSearch = (pokemon) => {
+    console.log(pokemon);
     this.setState({
       status: true,
       pokemon,
     });
+  }
+    
 
   pushToPokedex = () => this.props.funcToPush(this.state.pokemon);
 

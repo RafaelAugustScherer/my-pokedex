@@ -55,6 +55,11 @@ body {
   top: 5px;
 }
 
+.pokemon-image {
+  height: 85px;
+  margin-top: 10px;
+}
+
 .type-image {
   height: 50px;
   width: 50px;
