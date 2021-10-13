@@ -18,7 +18,7 @@ class Search extends Component {
   updateSearchValue = (value) => this.setState({ value });
 
   isPokemonInPokedex = () => {
-    const myPokedex = JSON.parse(localStorage.getItem('myPokedex'));
+    const myPokedex = this.props.pokemons;
     const pokemon = myPokedex.find((pokemon) => pokemon.id === this.state.pokemon.id && pokemon.isFavorite);
     return pokemon ? true : false;
   };
@@ -51,7 +51,6 @@ class Search extends Component {
   };
 
   renderSearch = (pokemon) => {
-    console.log(pokemon);
     this.setState({
       status: true,
       pokemon,
@@ -73,7 +72,7 @@ class Search extends Component {
           <Pokemon
             pokemon={this.state.pokemon}
             isFavorite={this.isPokemonInPokedex()}
-            handleFavorite={this.isPokemonInPokedex() ? this.removeFromPokedex: this.pushToPokedex}
+            handleFavorite={this.isPokemonInPokedex() ? this.removeFromPokedex : this.pushToPokedex}
           />
         ) : this.state.status === false ? (
           <Error />

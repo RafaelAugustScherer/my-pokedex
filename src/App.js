@@ -3,34 +3,37 @@ import './App.css';
 import PokemonList from './components/PokemonList';
 import Header from './components/Header';
 import Search from './components/Search';
+import data from './assets/data';
 
 class App extends Component {
   constructor() {
     super();
+
+    if (!localStorage.getItem('myPokedex')) {
+      localStorage.setItem('myPokedex', JSON.stringify(data));
+    }
     this.state = {
-      pokemonsToPush: [],
+      pokemons: JSON.parse(localStorage.getItem('myPokedex')),
     };
   }
 
-  PushPokemonToList = (pokemon) => {
-    const { pokemonsToPush } = this.state;
+  updatePokemonList = () =>
     this.setState({
-      pokemonsToPush: [...pokemonsToPush, pokemon],
-    });
+      pokemons: JSON.parse(localStorage.getItem('myPokedex')),
+    })
+
+  PushPokemonToList = (pokemon) => {
     const prevPokedex = JSON.parse(localStorage.getItem('myPokedex'));
     const newPokedex = JSON.stringify([...prevPokedex, pokemon]);
     localStorage.setItem('myPokedex', newPokedex);
+    this.updatePokemonList();
   };
 
   RemovePokemonFromList = (pokemon) => {
-    const { pokemonsToPush } = this.state;
-    const newPokemons = pokemonsToPush.filter((listPokemon) => listPokemon !== pokemon);
-    this.setState({
-      pokemonsToPush: newPokemons,
-    });
     const prevPokedex = JSON.parse(localStorage.getItem('myPokedex'));
-    const newPokedex = prevPokedex.filter((storagePokemon) => storagePokemon.id !== pokemon.id);
-    localStorage.setItem('myPokedex', JSON.stringify(newPokedex));
+    const newPokedex = JSON.stringify(prevPokedex.filter((storagePokemon) => storagePokemon.id !== pokemon.id));
+    localStorage.setItem('myPokedex', newPokedex);
+    this.updatePokemonList();
   };
 
   render() {
@@ -38,8 +41,8 @@ class App extends Component {
       <>
         <Header title="My Pokedex" />
         <div className="App">
-          <PokemonList searchedPokemons={this.state.pokemonsToPush} />
-          <Search funcToPush={this.PushPokemonToList} funcToRemove={this.RemovePokemonFromList} />
+          <PokemonList pokemons={this.state.pokemons} updateList={this.updatePokemonList} />
+          <Search pokemons={this.state.pokemons} funcToPush={this.PushPokemonToList} funcToRemove={this.RemovePokemonFromList} />
         </div>
       </>
     );

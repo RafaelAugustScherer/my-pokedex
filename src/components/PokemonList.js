@@ -1,41 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Pokemon from './Pokemon';
-import data from '../assets/data';
 
 class PokemonList extends Component {
-  constructor(props) {
-    super(props);
-
-    if (!localStorage.getItem('myPokedex')) {
-      localStorage.setItem('myPokedex', JSON.stringify(data));
-    }
-    this.state = {
-      pokemons: JSON.parse(localStorage.getItem('myPokedex')),
-    };
-  }
 
   handleFavorite = (id) => {
-    const prevPokedex = this.state.pokemons;
+    const prevPokedex = JSON.parse(localStorage.getItem('myPokedex'));
     const newPokedex = prevPokedex.filter((pokemon) => pokemon.id !== id);
     localStorage.setItem('myPokedex', JSON.stringify(newPokedex));
-    this.setState({
-      pokemons: newPokedex,
-    });
+    this.props.updateList();
   };
 
   render() {
     return (
       <div className="Pokemon-list">
-        {this.state.pokemons.map((pokemon) =>
+        {this.props.pokemons.map((pokemon) =>
           pokemon.isFavorite ? (
             <Pokemon pokemon={pokemon} key={pokemon.id} handleFavorite={this.handleFavorite} isFavorite={true} />
           ) : null
         )}
-        { this.props.searchedPokemons.map((pokemon) => {
-            return <Pokemon pokemon={pokemon} key={pokemon.id} handleFavorite={this.handleFavorite} isFavorite={true} />
-        })
-        }
       </div>
     );
   }

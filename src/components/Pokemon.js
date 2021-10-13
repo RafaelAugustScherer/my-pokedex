@@ -3,21 +3,6 @@ import PropTypes from 'prop-types';
 import typeRefs from '../assets/typeRefs';
 
 class Pokemon extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isFavorite: this.props.isFavorite,
-    };
-  }
-
-  handleFavorite = async (id) => {
-    await this.setState((prevState) => ({
-      isFavorite: !prevState.isFavorite,
-    }));
-
-    this.props.handleFavorite(id, this.state.isFavorite);
-  };
-
   render() {
     const {
       pokemon: { id, name, types, averageWeight, image },
@@ -41,8 +26,8 @@ class Pokemon extends Component {
             Avg. Weight: {averageWeight.value} {averageWeight.measurementUnit}
           </p>
           <i
-            className={this.state.isFavorite ? 'bi bi-star-fill' : 'bi bi-star'}
-            onClick={() => this.handleFavorite(id)}
+            className={this.props.isFavorite ? 'bi bi-star-fill' : 'bi bi-star'}
+            onClick={() => this.props.handleFavorite(id)}
           ></i>
         </div>
       </div>
