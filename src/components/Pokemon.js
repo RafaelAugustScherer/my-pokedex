@@ -1,48 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import typeRefs from '../assets/typeRefs';
 
-class Pokemon extends Component {
-  render() {
-    const {
-      pokemon: { id, name, types, averageWeight, image },
-    } = this.props;
-    return (
-      <div className="Pokemon" style={{ borderColor: typeRefs[types[0]][1] }}>
-        <span className="pokemon-id">#{id}</span>
-        <div>
-          <img className="pokemon-image" src={image} alt="Pokemon Name" />
-          <p className="pokemon-name">{name}</p>
-        </div>
-        {types.map((type, idx) => (
-          <div key={idx}>
-            <img className="type-image" src={typeRefs[type][0]} alt="Type Icon" />
+const Pokemon = ({ pokemon: { id, name, types, averageWeight, image }, isFavorite, handleFavorite }) => (
+  <div className="Pokemon" style={{ borderColor: typeRefs[types[0]][1] }}>
+    <span className="pokemon-id">#{id}</span>
+    <div>
+      <img className="pokemon-image" src={image} alt="Pokemon Name" />
+      <p className="pokemon-name">{name}</p>
+    </div>
+    {types.map((type, idx) => (
+      <div key={idx}>
+        <img className="type-image" src={typeRefs[type][0]} alt="Type Icon" />
 
-            <p className="pokemon-type">{type}</p>
-          </div>
-        ))}
-        <div id="pokemon-lower-div">
-          <p className="pokemon-weight">
-            Avg. Weight: {averageWeight.value} {averageWeight.measurementUnit}
-          </p>
-          <i
-            className={this.props.isFavorite ? 'bi bi-star-fill' : 'bi bi-star'}
-            onClick={() => this.props.handleFavorite(id)}
-          ></i>
-        </div>
+        <p className="pokemon-type">{type}</p>
       </div>
-    );
-  }
-}
+    ))}
+    <div id="pokemon-lower-div">
+      <p className="pokemon-weight">
+        Avg. Weight: {averageWeight.value} {averageWeight.measurementUnit}
+      </p>
+      <i
+        className={isFavorite ? 'bi bi-star-fill' : 'bi bi-star'}
+        onClick={() => handleFavorite(id)}
+      ></i>
+    </div>
+  </div>
+);
 
 Pokemon.propTypes = {
-  name: PropTypes.string,
-  type: PropTypes.string,
-  averageWeight: PropTypes.shape({
-    value: PropTypes.number,
-    measurementUnit: 'kg',
-  }),
-  image: PropTypes.string,
+  pokemon: PropTypes.objectOf(PropTypes.any),
+  isFavorite: PropTypes.func,
+  handleFavorite: PropTypes.func,
 };
 
 export default Pokemon;

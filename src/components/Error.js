@@ -1,13 +1,9 @@
-import { Component } from 'react';
+import React from 'react';
 
-class Error extends Component {
-    render() {
-        return (
-            <div className='Error'>
-                <p>Pokémon não encontrado</p>
-            </div>
-        )
-    }
-}
+const Error = () => (
+  <div className="Error">
+    <p>Pokémon não encontrado</p>
+  </div>
+);
 
 export default Error;

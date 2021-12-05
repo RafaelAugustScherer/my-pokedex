@@ -1,46 +1,37 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Pokemon from './Pokemon';
 import SearchBar from './SearchBar';
 import SearchButton from './SearchButton';
 import Error from './Error';
 
-class Search extends Component {
-  constructor(props) {
-    super(props);
+function Search({ pokedex, PushPokemon, RemovePokemon }) {
+  const [status, setStatus] = useState(undefined);
+  const [value, setValue] = useState('');
+  const [pokemon, setPokemon] = useState('');
 
-    this.state = {
-      status: undefined,
-      value: '',
-      pokemon: {},
-    };
-  }
+  const capitalize = (str) => str.charAt(0).toUpperCase().concat(str.slice(1));
 
-  capitalize = (str) => str.charAt(0).toUpperCase().concat(str.slice(1));
+  const updateSearchValue = (value) => setValue(value.toLowerCase());
 
-  updateSearchValue = (value) => {
-    value = value.toLowerCase();
-    this.setState({ value });
-  };
-
-  isPokemonInPokedex = () => {
-    const myPokedex = this.props.pokemons;
-    const pokemon = myPokedex.find(
-      (pokemon) => pokemon.id === this.state.pokemon.id && pokemon.isFavorite
+  const isPokemonInPokedex = () => {
+    const foundPokemon = pokedex.find(
+      ({ id, isFavorite }) => id === pokemon.id && isFavorite
     );
-    return pokemon ? true : false;
+    return !!(foundPokemon);
   };
 
-  search = () => {
-    this.setState({ status: undefined });
-    fetch(`https://pokeapi.co/api/v2/pokemon/${this.state.value}`)
+  const search = () => {
+    setStatus(undefined);
+    fetch(`https://pokeapi.co/api/v2/pokemon/${value}`)
       .then((response) => {
         if (response.ok) {
           response.json().then(({ id, name, types, weight, sprites }) => {
-            name = this.capitalize(name);
+            name = capitalize(name);
             types = types.map(({ type }) => type.name);
             sprites = sprites.versions['generation-v']['black-white'].animated;
             
-            this.renderSearch({
+            renderSearch({
               id,
               name,
               types,
@@ -53,45 +44,47 @@ class Search extends Component {
             });
           });
         } else {
-          this.setState({ status: false });
+          setStatus(false);
         }
       })
       .catch((err) => console.log('Fetch Error: ', err.message));
   };
 
-  renderSearch = (pokemon) => {
-    this.setState({
-      status: true,
-      pokemon,
-    });
+  const renderSearch = (searchPokemon) => {
+    setPokemon(searchPokemon)
+    setStatus(true);
   };
 
-  pushToPokedex = () => this.props.Push(this.state.pokemon);
+  const pushToPokedex = () => PushPokemon(pokemon);
 
-  removeFromPokedex = () => this.props.Remove(this.state.pokemon);
-
-  render() {
+  const removeFromPokedex = () => RemovePokemon(pokemon);
     return (
       <div className="Search">
         <h2>Adicionar Pokémons</h2>
         <SearchBar
-          onChange={this.updateSearchValue}
-          onEnter={this.search}
-          value={this.state.value}
+          onChange={updateSearchValue}
+          onEnter={search}
+          value={value}
         />
-        <SearchButton onClick={this.search} />
-        {this.state.status ? (
+        <SearchButton onClick={search} />
+        { console.log(status)}
+        {status ? (
           <Pokemon
-            pokemon={this.state.pokemon}
-            isFavorite={this.isPokemonInPokedex()}
-            handleFavorite={this.isPokemonInPokedex() ? this.removeFromPokedex : this.pushToPokedex}
+            pokemon={pokemon}
+            isFavorite={isPokemonInPokedex()}
+            handleFavorite={isPokemonInPokedex() ? removeFromPokedex : pushToPokedex}
           />
-        ) : this.state.status === false ? (
+        ) : status === false ? (
           <Error />
         ) : null}
       </div>
     );
-  }
+}
+
+Search.propTypes = {
+  pokedex: PropTypes.objectOf(PropTypes.any),
+  PushPokemon: PropTypes.func,
+  RemovePokemon: PropTypes.func,
 }
 
 export default Search;

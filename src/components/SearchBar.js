@@ -1,24 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-class SearchBar extends Component {
-  onChange = ({ target: { value } }) => this.props.onChange(value);
+const SearchBar = ({ value, onChange, onEnter }) => (
+  <input
+    className="Search-bar"
+    type="text"
+    placeholder="Pesquise por um Pokémon..."
+    value={value}
+    onChange={({ target: { value } }) => onChange(value)}
+    onKeyDown={({ key }) => key === 'Enter' && onEnter()}
+  />
+);
 
-  onKeyDown = (e) => {
-    if (e.key === 'Enter') this.props.onEnter();
-  }
-
-  render() {
-    return (
-      <input
-        className="Search-bar"
-        type="text"
-        placeholder="Pesquise por um Pokémon..."
-        value={this.props.value}
-        onChange={this.onChange}
-        onKeyDown={this.onKeyDown}
-      />
-    );
-  }
+SearchBar.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  onEnter: PropTypes.func,
 }
 
 export default SearchBar;
