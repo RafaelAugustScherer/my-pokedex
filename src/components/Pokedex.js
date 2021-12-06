@@ -1,24 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import Pokemon from './Pokemon';
+import PokedexContext from '../context/PokedexContext';
 
-const Pokedex = ({ pokemons, RemovePokemon }) => (
-  <div className="Pokemon-list">
-    {pokemons.map((pokemon) =>
-      pokemon.isFavorite ? (
-        <Pokemon
-          pokemon={pokemon}
-          key={pokemon.id}
-          handleFavorite={() => RemovePokemon(pokemon)}
-          isFavorite={true}
-        />
-      ) : null
-    )}
-  </div>
-);
-
-Pokedex.propTypes = {
-  pokemons: PropTypes.arrayOf(PropTypes.object),
+const Pokedex = () => {
+  const { pokedex } = useContext(PokedexContext);
+  console.log(pokedex)
+  return (
+    <div className="Pokemon-list">
+      {pokedex.map(
+        (pokemon) =>
+          pokemon.isFavorite && (
+            <Pokemon pokemon={pokemon} key={pokemon.id} />
+          ) 
+      )}
+    </div>
+  );
 };
 
 export default Pokedex;
