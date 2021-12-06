@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import initialPokedex from '../assets/data';
 
 function usePokedex() {
@@ -10,6 +10,10 @@ function usePokedex() {
   }
 
   const [pokedex, setPokedex] = useState(currentPokedex);
+  
+  useEffect(() => {
+    console.log(pokedex);
+  }, [pokedex])
 
   const pushPokemon = (pokemon) => {
     const newPokedex = [...pokedex, pokemon];

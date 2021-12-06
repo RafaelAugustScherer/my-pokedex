@@ -4,8 +4,9 @@ import typeRefs from '../assets/typeRefs';
 import PokedexContext from '../context/PokedexContext';
 
 const Pokemon = ({ pokemon }) => {
-  const { id, name, types, averageWeight, image, isFavorite } = pokemon;
+  const { id, name, types, averageWeight, image } = pokemon;
   const { pushPokemon, removePokemon, isPokemonInPokedex } = useContext(PokedexContext);
+  
   
   return (
   <div className="Pokemon" style={{ borderColor: typeRefs[types[0]][1] }}>
@@ -26,7 +27,7 @@ const Pokemon = ({ pokemon }) => {
       </p>
       <i
         className={isPokemonInPokedex(pokemon) ? 'bi bi-star-fill' : 'bi bi-star'}
-        onClick={ !isFavorite ? () => pushPokemon(pokemon) : () => removePokemon(pokemon) }
+        onClick={ !isPokemonInPokedex(pokemon) ? () => pushPokemon(pokemon) : () => removePokemon(pokemon) }
       ></i>
     </div>
   </div>

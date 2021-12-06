@@ -4,7 +4,6 @@ import PokedexContext from '../context/PokedexContext';
 
 const Pokedex = () => {
   const { pokedex } = useContext(PokedexContext);
-  console.log(pokedex)
   return (
     <div className="Pokemon-list">
       {pokedex.map(
